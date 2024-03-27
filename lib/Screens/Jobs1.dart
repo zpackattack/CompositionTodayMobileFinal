@@ -25,6 +25,7 @@ class Jobs extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromARGB(255, 250, 250, 250),
       ),
       home: Scaffold(
+        backgroundColor: Colors.white,
         body: CustomScrollView(
           slivers: [
             //Start Header
@@ -109,11 +110,12 @@ class Jobs extends StatelessWidget {
                       ), child: Container(
                       constraints: const BoxConstraints(maxWidth: 180.0, minHeight: 20.0),
                       alignment: Alignment.center,
-                      child: const Text(
+                      child: Text(
                         "Open in Browser",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: Colors.white
+                            color: Colors.white,
+                            fontSize: screenHeight * 0.018,
                         ),
                       ),
                     ),

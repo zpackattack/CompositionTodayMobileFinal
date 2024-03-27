@@ -68,6 +68,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bottom Tab Navigator',
       theme: ThemeData(
+
         primarySwatch: Colors.blue,
       ),
       home: MyBottomNavigationBar(),
@@ -100,6 +101,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

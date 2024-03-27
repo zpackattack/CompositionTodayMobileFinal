@@ -67,7 +67,7 @@ class Competition extends StatelessWidget {
               left: titleLeft,
               top: titleTop,
               child: SizedBox(
-                width: cardWidth * 0.7381,
+                width: cardWidth * 0.9,
                 height: cardHeight * 0.375,
                 child: Text(
                   competitionTitle,

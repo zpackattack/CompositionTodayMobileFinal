@@ -36,9 +36,9 @@ class Festival extends StatelessWidget {
     final organizationTop = cardHeight * 0.44;
     final dateLeft = cardWidth * 0.05;
     final dateTop = cardHeight * 0.65;
-    final locationLeft = cardWidth * 0.72;
+    final locationLeft = cardWidth * 0.71;
     final locationTop = cardHeight * 0.44;
-    final iconLeft = cardWidth * 0.67;
+    final iconLeft = cardWidth * 0.66;
     final iconTop = cardHeight * 0.42;
 
     return Center(
@@ -126,8 +126,8 @@ class Festival extends StatelessWidget {
                 children: [
                   SizedBox(width: cardWidth * 0.02), // Add some spacing between the icon and text
                   SizedBox(
-                    width: cardWidth * 0.23,
-                    height: cardHeight * 0.4,
+                    width: cardWidth * 0.27,
+                    height: cardHeight * 0.5,
                     child: Text(
                       '$festivalCity $festivalState',
                       style: TextStyle(

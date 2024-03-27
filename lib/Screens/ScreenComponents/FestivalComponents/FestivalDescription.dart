@@ -101,7 +101,7 @@ class FestivalDescription extends StatelessWidget {
                     '${data.city} ${data.state}',
                     style: TextStyle(
                       color: Color(0xFF454545),
-                      fontSize: screenHeight * 0.025,
+                      fontSize: screenHeight * 0.027,
                       fontFamily: 'SF Pro',
                       fontWeight: FontWeight.w400,
                     ),
@@ -127,7 +127,7 @@ class FestivalDescription extends StatelessWidget {
                       '${data.start} - ${data.end}',
                       style: TextStyle(
                         color: Color(0xFF454545),
-                        fontSize: screenHeight * 0.025,
+                        fontSize: screenHeight * 0.027,
                         fontFamily: 'SF Pro',
                         fontWeight: FontWeight.w400,
                       ),
@@ -154,7 +154,7 @@ class FestivalDescription extends StatelessWidget {
                       data.deadline,
                       style: TextStyle(
                         color: Color(0xFF454545),
-                        fontSize: screenHeight * 0.025,
+                        fontSize: screenHeight * 0.027,
                         fontFamily: 'SF Pro',
                         fontWeight: FontWeight.w400,
                       ),

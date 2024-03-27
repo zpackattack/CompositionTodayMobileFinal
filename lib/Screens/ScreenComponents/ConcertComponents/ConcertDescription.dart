@@ -36,6 +36,8 @@ class ConcertDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(title: const Text(""),
         backgroundColor: Colors.white,
@@ -50,12 +52,12 @@ class ConcertDescription extends StatelessWidget {
               data.title,
               style: TextStyle(
                 color: Color(0xFF228BE6),
-                fontSize: 32,
+                fontSize: screenHeight * 0.038,
                 fontFamily: 'SF Pro',
                 fontWeight: FontWeight.w700,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 0.02 * screenHeight),
         GestureDetector(
           onTap: () {
             MapsLauncher.launchQuery(
@@ -65,27 +67,27 @@ class ConcertDescription extends StatelessWidget {
               data.org,
               style: TextStyle(
                 color: Color(0xFF454545),
-                fontSize: 25,
+                fontSize: screenHeight * 0.034,
                 fontFamily: 'SF Pro',
                 fontWeight: FontWeight.w600,
               ),
             ),
         ),
-            SizedBox(height: 24),
+            SizedBox(height: 0.04 * screenHeight),
 
             Row(
               children: [
                 Icon(
                   Icons.location_pin, // You can replace this with your desired icon
                   color: Colors.green,
-                  size: 23,
+                  size: screenHeight * 0.035,
                 ),
-                SizedBox(width: 4),
+                SizedBox(width: 0.01 * screenWidth),
                 Text(
                  '${data.city} ${data.state}',
                   style: TextStyle(
                     color: Color(0xFF454545),
-                    fontSize: 23,
+                    fontSize: screenHeight * 0.03,
                     fontFamily: 'SF Pro',
                     fontWeight: FontWeight.w400,
                   ),
@@ -93,16 +95,16 @@ class ConcertDescription extends StatelessWidget {
               ],
             ),
 
-            SizedBox(height: 8),
+            SizedBox(height: 0.016 * screenHeight),
 
             Row(
               children: [
                 Icon(
                   Icons.map_rounded, // You can replace this with your desired icon
                   color: Colors.green,
-                  size: 23,
+                  size: screenHeight * 0.035,
                 ),
-                SizedBox(width: 4),
+                SizedBox(width: 0.01 * screenWidth),
                 GestureDetector(
                 onTap: () {
                   MapsLauncher.launchQuery(
@@ -112,7 +114,7 @@ class ConcertDescription extends StatelessWidget {
                   data.address,
                   style: TextStyle(
                     color: Color(0xFF454545),
-                    fontSize: 23,
+                    fontSize: screenHeight * 0.03,
                     fontFamily: 'SF Pro',
                     fontWeight: FontWeight.w400,
                   ),
@@ -120,7 +122,7 @@ class ConcertDescription extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 0.016 * screenHeight),
           GestureDetector(
             onTap: () {
               Add2Calendar.addEvent2Cal(
@@ -132,14 +134,14 @@ class ConcertDescription extends StatelessWidget {
                 Icon(
                   Icons.calendar_month_rounded, // You can replace this with your desired icon
                   color: Colors.green,
-                  size: 23,
+                  size: screenHeight * 0.035,
                 ),
-              SizedBox(width: 4),
+              SizedBox(width: 0.01 * screenWidth),
               Text(
                 data.date,
                 style: TextStyle(
                   color: Color(0xFF454545),
-                  fontSize: 23,
+                  fontSize: screenHeight * 0.03,
                   fontFamily: 'SF Pro',
                   fontWeight: FontWeight.w400,
                 ),
@@ -147,20 +149,20 @@ class ConcertDescription extends StatelessWidget {
               ],
             ),
           ),
-            SizedBox(height: 8),
+            SizedBox(height: 0.016 * screenHeight),
             Row(
               children: [
                 Icon(
                   CupertinoIcons.clock, // You can replace this with your desired icon
                   color: Colors.green,
-                  size: 26,
+                  size: screenHeight * 0.035,
                 ),
                 SizedBox(width: 4),
                 Text(
                   data.startTime,
                   style: TextStyle(
                     color: Color(0xFF454545),
-                    fontSize: 23,
+                    fontSize: screenHeight * 0.03,
                     fontFamily: 'SF Pro',
                     fontWeight: FontWeight.w400,
                   ),
@@ -169,67 +171,65 @@ class ConcertDescription extends StatelessWidget {
             ),
 
 
-            SizedBox(height: 24),
+            SizedBox(height: 0.04 * screenHeight),
             Center(
-            child: Ink(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF00A550), Color(0xFF228BE6)],),
-                borderRadius: BorderRadius.all(Radius.circular(80.0)),
-              ),
-              child: ElevatedButton(
-                onPressed: () async {
-                  final url = Uri.parse(data.link);
-                  if (await canLaunchUrl(url)) {
-                    launchUrl(url, mode: LaunchMode.externalApplication);
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                  backgroundColor: Colors.transparent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100),
-                  ), // Adjust Rect dimensions as needed
-
+              child: Ink(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xFF00A550), Color(0xFF228BE6)],
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(80)),
                 ),
-
-
-                child: Container(
-                  constraints: const BoxConstraints(maxWidth: 100, minHeight: 25),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    "More Info",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final url = Uri.parse(data.link);
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(url, mode: LaunchMode.externalApplication);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                    backgroundColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                  ),
+                  child: Container(
+                    constraints: BoxConstraints(maxWidth: screenWidth * 0.4, minHeight: screenHeight * 0.025),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "More Info",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: screenHeight * 0.025,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-            ),
-    SizedBox(height: 24),
+            SizedBox(height: 0.04 * screenHeight),
             Text(
               'Description:',
               style: TextStyle(
                 color: Color(0xFF454545),
-                fontSize: 25,
+                fontSize: screenHeight * 0.033,
                 fontFamily: 'SF Pro',
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 0.016 * screenHeight),
             Text(
-                data.description,
-                style: TextStyle(
-                  color: Color(0xFF454545),
-                  fontSize: 20,
-                  fontFamily: 'SF Pro',
-                  fontWeight: FontWeight.w500,
-                ),
+              data.description,
+              style: TextStyle(
+                color: Color(0xFF454545),
+                fontSize: screenHeight * 0.025,
+                fontFamily: 'SF Pro',
+                fontWeight: FontWeight.w500,
               ),
-            SizedBox(height: 80),
+            ),
+            SizedBox(height: 0.2 * screenHeight),
           ],
         ),
       ),
@@ -237,4 +237,3 @@ class ConcertDescription extends StatelessWidget {
     );
   }
 }
-
