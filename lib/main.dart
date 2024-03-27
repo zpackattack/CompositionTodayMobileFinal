@@ -47,6 +47,7 @@ Future<void> main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseApi().initNotifications();
+  await FirebaseMessaging.instance.subscribeToTopic('all');
   WidgetsFlutterBinding.ensureInitialized();
 
 
