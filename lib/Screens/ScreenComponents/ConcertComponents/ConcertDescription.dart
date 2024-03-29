@@ -83,13 +83,16 @@ class ConcertDescription extends StatelessWidget {
                   size: screenHeight * 0.035,
                 ),
                 SizedBox(width: 0.01 * screenWidth),
-                Text(
-                 '${data.city} ${data.state}',
-                  style: TextStyle(
-                    color: Color(0xFF454545),
-                    fontSize: screenHeight * 0.03,
-                    fontFamily: 'SF Pro',
-                    fontWeight: FontWeight.w400,
+                Flexible(
+                  child: Text(
+                    '${data.city} ${data.state}',
+                    style: TextStyle(
+                      color: Color(0xFF454545),
+                      fontSize: screenHeight * 0.03,
+                      fontFamily: 'SF Pro',
+                      fontWeight: FontWeight.w400,
+                    ),
+                    maxLines: 2,
                   ),
                 ),
               ],
@@ -105,12 +108,14 @@ class ConcertDescription extends StatelessWidget {
                   size: screenHeight * 0.035,
                 ),
                 SizedBox(width: 0.01 * screenWidth),
-                GestureDetector(
+                Flexible(
+                child:GestureDetector(
                 onTap: () {
                   MapsLauncher.launchQuery(
                       data.address);
                 },
-                child: Text(
+
+                  child: Text(
                   data.address,
                   style: TextStyle(
                     color: Color(0xFF454545),
@@ -118,6 +123,8 @@ class ConcertDescription extends StatelessWidget {
                     fontFamily: 'SF Pro',
                     fontWeight: FontWeight.w400,
                   ),
+                    maxLines: 2,
+                ),
                 ),
                 ),
               ],

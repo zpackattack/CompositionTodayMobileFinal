@@ -97,7 +97,7 @@ class Festivals extends StatelessWidget {
                     ),
                     child: ElevatedButton(
                       onPressed: () async {
-                        final url = Uri.parse('http://compositiontoday.net');
+                        final url = Uri.parse('https://compositiontoday.net/#/festivals');
                         if (await canLaunchUrl(url)) {
                           launchUrl(url, mode: LaunchMode.externalApplication);
                         }

@@ -122,8 +122,8 @@ class Concert extends StatelessWidget {
                 children: [
                   SizedBox(width: cardWidth * 0.02), // Add some spacing between the icon and text
                   SizedBox(
-                    width: cardWidth * 0.23,
-                    height: cardHeight * 0.4,
+                    width: cardWidth * 0.24,
+                    height: cardHeight * 0.5,
                     child: Text(
                       '$ConcertCity $ConcertState',
                       style: TextStyle(
@@ -133,6 +133,7 @@ class Concert extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         height: 0,
                       ),
+                      softWrap: true,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),

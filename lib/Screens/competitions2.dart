@@ -110,7 +110,7 @@ class _CompetitionsState extends State<Competitions2> {
                     ),
                     child: ElevatedButton(
                       onPressed: () async {
-                        final url = Uri.parse('http://compositiontoday.net');
+                        final url = Uri.parse('https://compositiontoday.net/#/compositions');
                         if (await canLaunchUrl(url)) {
                           launchUrl(url, mode: LaunchMode.externalApplication);
                         }

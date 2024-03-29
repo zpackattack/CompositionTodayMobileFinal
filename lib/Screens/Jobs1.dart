@@ -95,7 +95,7 @@ class Jobs extends StatelessWidget {
                     ),
                     child: ElevatedButton(
                       onPressed: () async {
-                        final url = Uri.parse('http://compositiontoday.net');
+                        final url = Uri.parse('https://compositiontoday.net/#/jobs');
                         if (await canLaunchUrl(url)) {
                           launchUrl(url, mode: LaunchMode.externalApplication);
                         }
