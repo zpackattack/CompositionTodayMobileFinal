@@ -4,6 +4,18 @@ import 'package:flutter/rendering.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Blog extends StatelessWidget {
+  final String date_posted;
+  final String title;
+  final String organization;
+  final String description;
+
+  const Blog({
+    required this.date_posted,
+    required this.title,
+    required this.organization,
+    required this.description,
+  });
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -57,7 +69,7 @@ class Blog extends StatelessWidget {
                 height: cardHeight * 0.6,
                 child:Center(
                   child: Text(
-                    "No blog posts yet",
+                    title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color(0xFF228BE6),
@@ -76,10 +88,10 @@ class Blog extends StatelessWidget {
               left: cardWidth*0.05,
               top: cardHeight*0.75,
               child: SizedBox(
-                width: cardWidth*0.4,
-                height: 46,
+                width: cardWidth*0.5,
+                height: cardHeight*0.25,
                 child: Text(
-                  '',
+                  organization,
                   style: TextStyle(
                     color: Color(0xFF454545),
                     fontSize: cardHeight * 0.12,
@@ -98,7 +110,7 @@ class Blog extends StatelessWidget {
                 width: cardWidth*0.45,
                 height: 46,
                 child: Text(
-                  '',
+                  date_posted,
                   textAlign: TextAlign.right,
                   style: TextStyle(
                     color: Color(0xFF454545),

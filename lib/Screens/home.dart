@@ -415,57 +415,134 @@ class home extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 10),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: screenHeight*0.1),
-                        child: Center(
-                          child: Column(
-                            children: [
-                          Blog(),
-                          SizedBox(height: screenHeight*0.03),
-                        SizedBox(
+                        FutureBuilder<BlogData?>(
+                          future: fetchLatestBlog(),
+                          builder: (context, snapshot) {
+                            // Build Newsfeed section
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return CircularProgressIndicator(); // Show loading indicator while fetching data
+                            } else if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            } else {
+                              final latestBlogfeedData = snapshot.data;
+                              if (latestBlogfeedData != null) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 15.0),
+                                  child: Center(
+                                    child: Column(
+                                      children: [
+                                        Blog(
+                                          date_posted: latestBlogfeedData.date_posted,
+                                          title: latestBlogfeedData.title,
+                                          organization: latestBlogfeedData.organization,
+                                          description: latestBlogfeedData.description,
+                                        ),
+                                        SizedBox(height: screenHeight*0.03),
+                                        SizedBox(
 
-                          height: 50,
-                          width: screenWidth * 0.6,
-                          child: Ink(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Color(0xFF00A550), Color(0xFF228BE6)],
-                              ),
-                              borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                            ),
-                            child: ElevatedButton(
-                              onPressed: () async {
-                                final url = Uri.parse('http://compositiontoday.net/#/news');
-                                if (await canLaunchUrl(url)) {
-                                  launchUrl(url, mode: LaunchMode.externalApplication);
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                                backgroundColor: Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100),
-                                ), // Adjust Rect dimensions as needed
-                              ),
-                              child: Container(
-                                constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "See More",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: screenHeight * 0.018,
+                                          height: 50,
+                                          width: screenWidth * 0.6,
+                                          child: Ink(
+                                            decoration: const BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [Color(0xFF00A550), Color(0xFF228BE6)],
+                                              ),
+                                              borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                                            ),
+                                            child: ElevatedButton(
+                                              onPressed: () async {
+                                                final url = Uri.parse('http://compositiontoday.net/#/blog');
+                                                if (await canLaunchUrl(url)) {
+                                                  launchUrl(url, mode: LaunchMode.externalApplication);
+                                                }
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                                                backgroundColor: Colors.transparent,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(100),
+                                                ), // Adjust Rect dimensions as needed
+                                              ),
+                                              child: Container(
+                                                constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  "See More",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: screenHeight * 0.018,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
-                          ),
+                                );
+                              } else {
+                                return Center(
+                                  child: Column(
+                                    children: [
+                                      Blog(
+                                          date_posted: '',
+                                          title: 'No blog posts yet',
+                                          organization: '',
+                                          description: ''
+                                      ),
+                                      SizedBox(
+
+                                        height: 50,
+                                        width: screenWidth * 0.6,
+                                        child: Ink(
+                                          decoration: const BoxDecoration(
+                                            gradient: LinearGradient(
+                                              colors: [Color(0xFF00A550), Color(0xFF228BE6)],
+                                            ),
+                                            borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                                          ),
+                                          child: ElevatedButton(
+                                            onPressed: () async {
+                                              final url = Uri.parse('http://compositiontoday.net/#/blog');
+                                              if (await canLaunchUrl(url)) {
+                                                launchUrl(url, mode: LaunchMode.externalApplication);
+                                              }
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                                              backgroundColor: Colors.transparent,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(100),
+                                              ), // Adjust Rect dimensions as needed
+                                            ),
+                                            child: Container(
+                                              constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                "See More",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: screenHeight * 0.018,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+
+
+
+                              }
+                            }
+                          },
                         ),
-                          ],
-                          ),
-                        ),
-                        ),
+                        SizedBox(height: screenHeight*0.09)
                       ],
 
                     ),
@@ -507,6 +584,34 @@ Future<NewsfeedData?> fetchLatestNewsfeed() async {
   }
 }
 //End Fetch newsfeed data
+
+
+//Fetch blog data
+Future<BlogData?> fetchLatestBlog() async {
+  try {
+    final response = await http.get(Uri.parse('https://oyster-app-7l5vz.ondigitalocean.app/compositiontoday/blog?page_number=1'));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body)['listOfObjects'];
+
+      if (data.isNotEmpty) {
+        // Get the latest newsfeed data
+        final latestEntry = data[0];
+        return BlogData.fromJson(latestEntry);
+      } else {
+        return null; // Return null if there are no newsfeed entries
+      }
+    } else if (response.statusCode == 504) {
+      throw Exception('Failed to load data');
+    } else {
+      throw Exception('Failed to load data');
+    }
+  } catch (error) {
+    print("Error: $error");
+    throw error; // Rethrow the error to be caught by the FutureBuilder
+  }
+}
+//End Fetch blog data
 
 Future<List<FeaturedCompositionData>> fetchComps() async {
   try {
@@ -599,3 +704,37 @@ class NewsfeedData {
 }
 //End Store Newsfeed Data
 
+//Store Blog Data
+class BlogData {
+  final String title;
+  final String organization;
+  final String date_posted;
+  final String description;
+
+  BlogData({
+    required this.title,
+    required this.organization,
+    required this.date_posted,
+    required this.description,
+  });
+
+  factory BlogData.fromJson(Map<String, dynamic> json) {
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(json['date_posted']);
+    String formattedDate = DateFormat('MM/dd/yyyy').format(dateTime);
+
+    String org = json['organization'] ?? '';
+
+    if (org.toLowerCase().startsWith("posted by:")) {
+      // Extract the part after "posted by:"
+      org = org.substring("posted by:".length).trim();
+    }
+
+    return BlogData(
+      title: json['title'] ?? '',
+      organization: org,
+      date_posted: formattedDate ?? '',
+      description: json['description'] ?? '',
+    );
+  }
+}
+//End Store Blog Data

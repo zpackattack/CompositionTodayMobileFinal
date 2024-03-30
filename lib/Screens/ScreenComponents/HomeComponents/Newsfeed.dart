@@ -90,10 +90,10 @@ class Newsfeed extends StatelessWidget {
                 left: cardWidth*0.05,
                 top: cardHeight*0.75,
                 child: SizedBox(
-                  width: cardWidth*0.4,
-                  height: 46,
+                  width: cardWidth*0.5,
+                  height: cardHeight*0.25,
                   child: Text(
-                    organization,
+                    writer,
                     style: TextStyle(
                       color: Color(0xFF454545),
                       fontSize: cardHeight * 0.12,
@@ -112,7 +112,7 @@ class Newsfeed extends StatelessWidget {
                   width: cardWidth*0.45,
                   height: 46,
                   child: Text(
-                    writer,
+                    organization,
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       color: Color(0xFF454545),
