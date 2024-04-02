@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:compositiontodaymobile1/Screens/ScreenComponents/HomeComponents/BlogDescription.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'ScreenComponents/HomeComponents/FeaturedComposition.dart';
@@ -432,11 +433,21 @@ class home extends StatelessWidget {
                                   child: Center(
                                     child: Column(
                                       children: [
-                                        Blog(
+                                        GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                          builder: (context) => BlogDescription(data: latestBlogfeedData),
+                                          ),
+                                          );
+                                          },
+                                        child:Blog(
                                           date_posted: latestBlogfeedData.date_posted,
                                           title: latestBlogfeedData.title,
                                           organization: latestBlogfeedData.organization,
                                           description: latestBlogfeedData.description,
+                                        ),
                                         ),
                                         SizedBox(height: screenHeight*0.03),
                                         SizedBox(
