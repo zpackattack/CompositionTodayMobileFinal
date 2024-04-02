@@ -326,6 +326,7 @@ class home extends StatelessWidget {
                                         organization: '',
                                         writer: '',
                                       ),
+                                      SizedBox(height: screenHeight*0.03),
                                       SizedBox(
 
                                         height: 50,
@@ -492,6 +493,7 @@ class home extends StatelessWidget {
                                           organization: '',
                                           description: ''
                                       ),
+                                      SizedBox(height: screenHeight*0.03),
                                       SizedBox(
 
                                         height: 50,
