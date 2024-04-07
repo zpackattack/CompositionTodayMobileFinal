@@ -33,13 +33,6 @@ class Blog extends StatelessWidget {
     return SizedBox(
       width: cardWidth,
       height: cardHeight,
-      child: GestureDetector(
-        onTap: () async {
-          final url = Uri.parse(''); // Replace 'https://example.com' with your desired URL
-          if (await canLaunchUrl(url)) {
-            launchUrl(url, mode: LaunchMode.externalApplication);
-          }
-        },
         child: Stack(
           children: [
             Positioned(
@@ -126,7 +119,6 @@ class Blog extends StatelessWidget {
             ),
           ],
         ),
-      ),
     );
 
   }

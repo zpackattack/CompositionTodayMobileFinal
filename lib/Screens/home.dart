@@ -30,13 +30,13 @@ class home extends StatelessWidget {
             //Start Header
             SliverAppBar(
               pinned: true,
-              expandedHeight: 100.0, // Adjust the height as needed
+              expandedHeight: 108.0, // Adjust the height as needed
               backgroundColor: Colors.white,
               flexibleSpace: FlexibleSpaceBar(
                 title: Align(
                   alignment: Alignment.bottomCenter,
                   child: Row(
-                    mainAxisAlignment: Platform.isIOS ? MainAxisAlignment.center : MainAxisAlignment.start, //Fixes bug where title is left aligned on iOS
+                    mainAxisAlignment: Platform.isIOS ? MainAxisAlignment.center : MainAxisAlignment.center, //Fixes bug where title is left aligned on iOS
                     children: <Widget>[
                       RichText(
                         text: TextSpan(
@@ -45,7 +45,7 @@ class home extends StatelessWidget {
                               text: 'COMPOSITION:',
                               style: TextStyle(
                                 color: Color(0xFF454545),
-                                fontSize: Platform.isIOS ? screenHeight * 0.02 : 16,
+                                fontSize: Platform.isIOS ? screenHeight * 0.02 : screenHeight * 0.02,
                                 fontFamily: 'SF Pro',
                                 fontWeight: FontWeight.w500,
                               ),
@@ -54,7 +54,7 @@ class home extends StatelessWidget {
                               text: 'TODAY',
                               style: TextStyle(
                                 color: Color(0xFF228BE6),
-                                fontSize: Platform.isIOS ? screenHeight * 0.02 : 16,
+                                fontSize: Platform.isIOS ? screenHeight * 0.02 : screenHeight * 0.02,
                                 fontFamily: 'SF Pro',
                                 fontWeight: FontWeight.w500,
                               ),
@@ -80,7 +80,7 @@ class home extends StatelessWidget {
             SliverAppBar(
               pinned: true,
               floating: true,
-              expandedHeight: 52.0,
+              expandedHeight: screenHeight*0.068,
               backgroundColor: Colors.white,
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(0.0),
@@ -275,7 +275,7 @@ class home extends StatelessWidget {
                                         SizedBox(height: screenHeight*0.03),
                                         SizedBox(
 
-                                          height: 50,
+                                          height: screenHeight*0.06,
                                           width: screenWidth * 0.6,
                                           child: Ink(
                                           decoration: const BoxDecoration(
@@ -330,7 +330,7 @@ class home extends StatelessWidget {
                                       SizedBox(height: screenHeight*0.03),
                                       SizedBox(
 
-                                        height: 50,
+                                        height: screenHeight*0.06,
                                         width: screenWidth * 0.6,
                                         child: Ink(
                                           decoration: const BoxDecoration(
@@ -452,7 +452,7 @@ class home extends StatelessWidget {
                                         SizedBox(height: screenHeight*0.03),
                                         SizedBox(
 
-                                          height: 50,
+                                          height: screenHeight*0.06,
                                           width: screenWidth * 0.6,
                                           child: Ink(
                                             decoration: const BoxDecoration(
@@ -463,7 +463,7 @@ class home extends StatelessWidget {
                                             ),
                                             child: ElevatedButton(
                                               onPressed: () async {
-                                                final url = Uri.parse('http://compositiontoday.net/#/blog');
+                                                final url = Uri.parse('https://compositiontoday.net/#/blog');
                                                 if (await canLaunchUrl(url)) {
                                                   launchUrl(url, mode: LaunchMode.externalApplication);
                                                 }
@@ -507,7 +507,7 @@ class home extends StatelessWidget {
                                       SizedBox(height: screenHeight*0.03),
                                       SizedBox(
 
-                                        height: 50,
+                                        height: screenHeight*0.06,
                                         width: screenWidth * 0.6,
                                         child: Ink(
                                           decoration: const BoxDecoration(

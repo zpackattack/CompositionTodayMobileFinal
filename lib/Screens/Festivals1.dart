@@ -33,7 +33,7 @@ class Festivals extends StatelessWidget {
             //Start Header
             SliverAppBar(
               pinned: true,
-              expandedHeight: 100.0, // Adjust the height as needed
+              expandedHeight: 108.0, // Adjust the height as needed
               backgroundColor: Colors.white,
               flexibleSpace: FlexibleSpaceBar(
                 title: Align(
@@ -83,7 +83,7 @@ class Festivals extends StatelessWidget {
             SliverAppBar(
               pinned: true,
               floating: true,
-              expandedHeight: 52.0,
+              expandedHeight: screenHeight*0.068,
               backgroundColor: Colors.white,
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(0.0),

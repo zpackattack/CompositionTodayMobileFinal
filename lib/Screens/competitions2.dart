@@ -46,7 +46,7 @@ class _CompetitionsState extends State<Competitions2> {
             //Start Header
             SliverAppBar(
               pinned: true,
-              expandedHeight: 100.0, // Adjust the height as needed
+              expandedHeight: 108.0, // Adjust the height as needed
               backgroundColor: Colors.white,
               flexibleSpace: FlexibleSpaceBar(
                 title: Align(
@@ -96,7 +96,7 @@ class _CompetitionsState extends State<Competitions2> {
             SliverAppBar(
               pinned: true,
               floating: true,
-              expandedHeight: 52.0,
+              expandedHeight: screenHeight*0.068,
               backgroundColor: Colors.white,
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(0.0),
