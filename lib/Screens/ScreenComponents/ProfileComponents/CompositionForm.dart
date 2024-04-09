@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,6 +25,7 @@ class _CompositionOpportunityFormState extends State<CompositionOpportunityForm>
         ? Center(child: CircularProgressIndicator())
         : Form(
       key: _formKey,
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -34,7 +37,7 @@ class _CompositionOpportunityFormState extends State<CompositionOpportunityForm>
               }
               return null;
             },
-            onSaved: (value) {
+            onChanged: (value) {
               _title = value!;
             },
           ),
@@ -209,13 +212,44 @@ class _CompositionOpportunityFormState extends State<CompositionOpportunityForm>
     print('Awards: $_awards');
     print('Description: $_description');
     try {
+      DateTime now = DateTime.now();
+      int unixTimeMilliseconds = now.millisecondsSinceEpoch;
       // HTTP request example
       final response = await http.post(
-        Uri.parse('https://your-api-endpoint.com/create-post'),
-        body: {
-          'opportunityType': 'jobs',
-          // Other form field values...
-        },
+        Uri.parse('https://oyster-app-7l5vz.ondigitalocean.app/compositiontoday/compositions'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(<String, dynamic>{
+          "UID": "Xty1nS1JHrZzv6tLLdSkcsOWyhF2",
+          "title": _title,
+          "description": _description,
+          "link": _link,
+          "date_posted": unixTimeMilliseconds,
+          "end_date": null,
+          "organization": "user",
+          "type": "compositions",
+          "city": null,
+          "state": null,
+          "is_flagged": '0',
+          "is_deleted": '0',
+          "deleted_comment": null,
+          "salary": null,
+          "job_type": null,
+          "job_category": null,
+          "winner": null,
+          "competition_category": null,
+          "start_date": null,
+          "address": null,
+          "start_time": null,
+          "fee": null,
+          "deadline": null,
+          "is_scraped": 2,
+          "genre": _genre,
+          "published_date": null,
+          "hasbeenfeatured": null,
+          "likecount": 0,
+          "writer": null,
+          "awards": _awards
+        }),
       );
 
       // Check if the request was successful

@@ -83,10 +83,10 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Text('Login'),
             ),
             // Register button
-            ElevatedButton(
+            /*ElevatedButton(
               onPressed: _register,
               child: Text('Register'),
-            ),
+            ),*/
           ],
         ),
       ),

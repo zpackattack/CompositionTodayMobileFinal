@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -43,7 +45,7 @@ class _FestivalOpportunityFormState extends State<FestivalOpportunityForm> {
               }
               return null;
             },
-            onSaved: (value) {
+            onChanged: (value) {
               _title = value!;
             },
           ),
@@ -350,13 +352,46 @@ class _FestivalOpportunityFormState extends State<FestivalOpportunityForm> {
     print('Link: $_link');
     print('Description: $_description');
     try {
+      DateTime now = DateTime.now();
+      int unixTimeMilliseconds = now.millisecondsSinceEpoch;
+      int endDate = _endDate.microsecondsSinceEpoch;
+      int startDate = _startDate.microsecondsSinceEpoch;
       // HTTP request example
       final response = await http.post(
-        Uri.parse('https://your-api-endpoint.com/create-post'),
-        body: {
-          'opportunityType': 'jobs',
-          // Other form field values...
-        },
+        Uri.parse('https://oyster-app-7l5vz.ondigitalocean.app/compositiontoday/festivals'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(<String, dynamic>{
+          "UID": "Xty1nS1JHrZzv6tLLdSkcsOWyhF2",
+          "title": _title,
+          "description": _description,
+          "link": _link,
+          "date_posted": unixTimeMilliseconds,
+          "end_date": endDate,
+          "organization": _organization,
+          "type": "festivals",
+          "city": _isRemote ? "Remote" : _city,
+          "state": _isRemote ? "Remote" : _state,
+          "is_flagged": '0',
+          "is_deleted": '0',
+          "deleted_comment": null,
+          "salary": null,
+          "job_type": null,
+          "job_category": null,
+          "winner": null,
+          "competition_category": null,
+          "start_date": startDate,
+          "address": _address,
+          "start_time": null,
+          "fee": null,
+          "deadline": null,
+          "is_scraped": 2,
+          "genre": _genre,
+          "published_date": null,
+          "hasbeenfeatured": null,
+          "likecount": 0,
+          "writer": null,
+          "awards": null
+        }),
       );
 
       // Check if the request was successful

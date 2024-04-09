@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class CreateJobOpportunityForm extends StatefulWidget {
   @override
@@ -244,6 +245,7 @@ class _CreateJobOpportunityFormState extends State<CreateJobOpportunityForm> {
     // Here you can submit the job post to your API
     // Construct the job post object using the form data
     // Send a POST request to your API endpoint with the job post data
+    int dl = _deadline.millisecondsSinceEpoch;
     print('Submitting job post...');
     print('Title: $_title');
     print('Organization: $_organization');
@@ -252,28 +254,30 @@ class _CreateJobOpportunityFormState extends State<CreateJobOpportunityForm> {
     print('Salary: $_salary');
     print('City: $_city');
     print('State: $_state');
-    print('Deadline: $_deadline');
+    print('Deadline: $dl');
     print('Link: $_link');
     print('Description: $_description');
     try {
       DateTime now = DateTime.now();
       int unixTimeMilliseconds = now.millisecondsSinceEpoch;
+      int appDeadline = _deadline.millisecondsSinceEpoch;
       // HTTP request example
       final response = await http.post(
         Uri.parse('https://oyster-app-7l5vz.ondigitalocean.app/compositiontoday/jobs'),
-        body: {
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(<String, dynamic>{
           "UID": "Xty1nS1JHrZzv6tLLdSkcsOWyhF2",
           "title": _title,
           "description": _description,
           "link": _link,
           "date_posted": unixTimeMilliseconds,
-          "end_date": _deadline.millisecondsSinceEpoch,
+          "end_date": appDeadline,
           "organization": _organization,
           "type": "jobs",
           "city": _isRemote ? "Remote" : _city,
           "state": _isRemote ? "Remote" : _state,
-          "is_flagged": 0,
-          "is_deleted": 0,
+          "is_flagged": '0',
+          "is_deleted": '0',
           "deleted_comment": null,
           "salary": _salary == 0 ? null : _salary,
           "job_type": _jobType,
@@ -285,14 +289,14 @@ class _CreateJobOpportunityFormState extends State<CreateJobOpportunityForm> {
           "start_time": null,
           "fee": null,
           "deadline": null,
-          "is_scraped": null,
+          "is_scraped": 2,
           "genre": null,
           "published_date": null,
           "hasbeenfeatured": null,
           "likecount": 0,
           "writer": null,
           "awards": null
-        },
+        }),
       );
 
       // Check if the request was successful

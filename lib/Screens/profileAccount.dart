@@ -14,12 +14,6 @@ class UserInfoPage extends StatelessWidget {
         title: Text('Profile'),
         actions: [
           IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              // Navigate to the screen where the user can create a post
-            },
-          ),
-          IconButton(
             icon: Icon(Icons.logout),
             onPressed: () {
               _signOut(context);
