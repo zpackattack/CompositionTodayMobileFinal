@@ -1,11 +1,46 @@
-import 'package:compositiontodaymobile1/Screens/CreatePostPage.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
 
-class UserInfoPage extends StatelessWidget {
+import 'CreatePostPage.dart';
+
+class UserInfoPage extends StatefulWidget {
   final User user;
 
   const UserInfoPage({Key? key, required this.user}) : super(key: key);
+
+  @override
+  _UserInfoPageState createState() => _UserInfoPageState();
+}
+
+class _UserInfoPageState extends State<UserInfoPage> {
+  String? userName;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserName();
+  }
+
+  Future<void> fetchUserName() async {
+    try {
+      final response = await http.get(
+          Uri.parse('https://oyster-app-7l5vz.ondigitalocean.app/compositiontoday/users/${widget.user.uid}'));
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> userData = jsonDecode(response.body[0]);
+        setState(() {
+          userName = userData['first_name'];
+        });
+      } else {
+        throw Exception('Failed to fetch user data');
+      }
+    } catch (e) {
+      print('Error fetching user data: $e');
+      // Handle error - show a snackbar or dialog
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +60,17 @@ class UserInfoPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('User ID: ${user.uid}'),
+
+            if (userName != null) Text('Hello, $userName'),
+            SizedBox(height: 16),
+            Text('${widget.user.email}',
+              style: TextStyle(
+                color: Color(0xFF454545),
+                fontSize: 20,
+                fontFamily: 'SF Pro',
+                fontWeight: FontWeight.w500,
+              ),),
+            SizedBox(height: 25),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -35,8 +80,8 @@ class UserInfoPage extends StatelessWidget {
               },
               child: Text('Create Post'),
             ),
-            SizedBox(height: 16),
-            Text('Email: ${user.email}'),
+
+
           ],
         ),
       ),
