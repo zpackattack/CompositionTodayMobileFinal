@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:compositiontodaymobile1/Screens/ScreenComponents/HomeComponents/BlogDescription.dart';
+import 'package:compositiontodaymobile1/Screens/profile.dart';
+import 'package:compositiontodaymobile1/Screens/profileAccount.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'ScreenComponents/HomeComponents/FeaturedComposition.dart';
@@ -11,6 +14,30 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 //import '../../assets/img/BigMusicNote.png';
 import 'headers.dart';
+
+class AuthenticationWrapper extends StatelessWidget {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: _auth.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // Show loading indicator if authentication state is not yet determined
+          return CircularProgressIndicator();
+        } else if (snapshot.hasData) {
+          // User is signed in, navigate to home screen
+          return UserInfoPage(user: snapshot.data!);
+        } else {
+          // No user is signed in, navigate to login/register screen
+          return ProfilePage();
+        }
+      },
+    );
+  }
+}
+
 
 class home extends StatelessWidget {
   const home({Key? key}) : super(key: key);
@@ -35,45 +62,79 @@ class home extends StatelessWidget {
               flexibleSpace: FlexibleSpaceBar(
                 title: Align(
                   alignment: Alignment.bottomCenter,
+
+
                   child: Row(
-                    mainAxisAlignment: Platform.isIOS ? MainAxisAlignment.center : MainAxisAlignment.center, //Fixes bug where title is left aligned on iOS
-                    children: <Widget>[
-                      RichText(
-                        text: TextSpan(
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: 'COMPOSITION:',
-                              style: TextStyle(
-                                color: Color(0xFF454545),
-                                fontSize: Platform.isIOS ? screenHeight * 0.02 : screenHeight * 0.02,
-                                fontFamily: 'SF Pro',
-                                fontWeight: FontWeight.w500,
-                              ),
+                  children: <Widget>[
+
+                    // Left aligned
+                    Expanded(
+                      child:Padding(
+                      padding: Platform.isIOS ? EdgeInsets.symmetric(horizontal: screenWidth * 0.03) : EdgeInsets.only(left: 0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                          RichText(
+                            textAlign: TextAlign.start,
+                            text: TextSpan(
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'COMPOSITION:',
+                                  style: TextStyle(
+                                    color: Color(0xFF454545),
+                                    fontSize: screenHeight * 0.018,
+                                    fontFamily: 'SF Pro',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: 'TODAY',
+                                  style: TextStyle(
+                                    color: Color(0xFF228BE6),
+                                    fontSize: screenHeight * 0.018,
+                                    fontFamily: 'SF Pro',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
                             ),
-                            TextSpan(
-                              text: 'TODAY',
-                              style: TextStyle(
-                                color: Color(0xFF228BE6),
-                                fontSize: Platform.isIOS ? screenHeight * 0.02 : screenHeight * 0.02,
-                                fontFamily: 'SF Pro',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                          //Logo
+                          Image.asset(
+                            'lib/assets/img/MusicNote.png',
+                            height: screenHeight * 0.025,
+                            width: screenHeight * 0.025,
+                            fit: BoxFit.contain,
+                          ),
+                        ],
                       ),
-                      //Logo
-                      Image.asset(
-                        'lib/assets/img/MusicNote.png',
-                        height: screenHeight * 0.025,
-                        width: screenHeight * 0.025,
-                        fit: BoxFit.contain,
+                    ),
+                    ),
+                    // Right aligned
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          // Profile Icon
+                          IconButton(
+                            icon: Icon(Icons.account_circle, size: screenHeight * 0.03),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => AuthenticationWrapper()),
+                              );
+                            },
+                          ),
+                          // Dropdown menu for login/register
+
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ),
+          ),
+        ),
             //End Header
 
             //Start Open in browser button
@@ -566,6 +627,30 @@ class home extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+  void showPopupMenu(BuildContext context, Offset tapPosition) {
+    final RenderBox overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox;
+    final RelativeRect position = RelativeRect.fromRect(
+      Rect.fromPoints(
+        tapPosition,
+        tapPosition.translate(0.0, 0.0), // Adjust if needed
+      ),
+      Offset.zero & overlay.size,
+    );
+    showMenu(
+      context: context,
+      position: position,
+      items: [
+        PopupMenuItem(
+          child: Text("Login"),
+          value: "login",
+        ),
+        PopupMenuItem(
+          child: Text("Register"),
+          value: "register",
+        ),
+      ],
     );
   }
 }
