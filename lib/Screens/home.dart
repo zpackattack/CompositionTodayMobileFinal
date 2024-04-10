@@ -831,13 +831,26 @@ class BlogData {
       // Extract the part after "posted by:"
       org = org.substring("posted by:".length).trim();
     }
+    String title = '';
+    if(json['title'] != null){
+      title = removeDateSuffix(json["title"]);
+    }
+
 
     return BlogData(
-      title: json['title'] ?? '',
+      title: title,
       organization: org,
       date_posted: formattedDate ?? '',
       description: json['description'] ?? '',
     );
+  }
+}
+String removeDateSuffix(String title) {
+  RegExp regExp = RegExp(r'\s-\s\d{1,2}/\d{1,2}/\d{2}$');
+  if (regExp.hasMatch(title)) {
+    return title.replaceFirst(regExp, '');
+  } else {
+    return title;
   }
 }
 //End Store Blog Data
