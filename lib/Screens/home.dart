@@ -114,7 +114,8 @@ class home extends StatelessWidget {
                     ),
                     ),
                     // Right aligned
-                    Expanded(
+                    ClipRect(
+                      child:Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
@@ -132,6 +133,7 @@ class home extends StatelessWidget {
 
                         ],
                       ),
+                    ),
                     ),
                   ],
                 ),
