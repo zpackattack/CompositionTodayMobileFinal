@@ -48,11 +48,14 @@ Future<void> main() async{
   );
   await FirebaseApi().initNotifications();
   await FirebaseMessaging.instance.subscribeToTopic('all');
-  WidgetsFlutterBinding.ensureInitialized();
 
 
   //FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(MyApp());
+  FlutterError.onError = (FlutterErrorDetails details) {
+    print('flutter error hidden from console');
+    FlutterError.dumpErrorToConsole(details, forceReport: false);
+  };
 }
 /*Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");

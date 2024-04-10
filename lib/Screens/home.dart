@@ -68,7 +68,9 @@ class home extends StatelessWidget {
                   children: <Widget>[
 
                     // Left aligned
-                    Expanded(
+
+                    ClipRect(
+                      child: Expanded(
                       child:Padding(
                       padding: Platform.isIOS ? EdgeInsets.symmetric(horizontal: screenWidth * 0.03) : EdgeInsets.only(left: 0),
                   child: Row(
@@ -108,6 +110,7 @@ class home extends StatelessWidget {
                           ),
                         ],
                       ),
+                    ),
                     ),
                     ),
                     // Right aligned
