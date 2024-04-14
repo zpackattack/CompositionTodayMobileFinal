@@ -167,7 +167,7 @@ class Job extends StatelessWidget {
               top: locationTop,
               child: SizedBox(
                 width: cardWidth * 0.3,
-                height: cardHeight * 0.2,
+                height: cardHeight * 0.25,
                 child: Text(
                   Category,
                   style: TextStyle(

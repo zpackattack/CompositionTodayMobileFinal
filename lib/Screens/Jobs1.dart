@@ -25,7 +25,7 @@ class AuthenticationWrapper extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Show loading indicator if authentication state is not yet determined
-          return CircularProgressIndicator();
+          return CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.blue));
         } else if (snapshot.hasData) {
           // User is signed in, navigate to home screen
           return UserInfoPage(user: snapshot.data!);
@@ -61,7 +61,8 @@ class Jobs extends StatelessWidget {
               expandedHeight: 108.0, // Adjust the height as needed
               backgroundColor: Colors.white,
               flexibleSpace: FlexibleSpaceBar(
-                title: Align(
+                titlePadding: EdgeInsets.only(left: screenWidth*0.06),
+                title: /*Align(
                   alignment: Alignment.bottomCenter,
 
 
@@ -74,10 +75,11 @@ class Jobs extends StatelessWidget {
                         child: Expanded(
                           child:Padding(
                             padding: Platform.isIOS ? EdgeInsets.symmetric(horizontal: screenWidth * 0.03) : EdgeInsets.only(left: 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                            child: */
+                              Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                RichText(
+                              RichText(
                                   textAlign: TextAlign.start,
                                   text: TextSpan(
                                     children: <TextSpan>[
@@ -85,7 +87,7 @@ class Jobs extends StatelessWidget {
                                         text: 'COMPOSITION:',
                                         style: TextStyle(
                                           color: Color(0xFF454545),
-                                          fontSize: screenHeight * 0.018,
+                                          fontSize: screenHeight * 0.019,
                                           fontFamily: 'SF Pro',
                                           fontWeight: FontWeight.w500,
                                         ),
@@ -94,7 +96,7 @@ class Jobs extends StatelessWidget {
                                         text: 'TODAY',
                                         style: TextStyle(
                                           color: Color(0xFF228BE6),
-                                          fontSize: screenHeight * 0.018,
+                                          fontSize: screenHeight * 0.019,
                                           fontFamily: 'SF Pro',
                                           fontWeight: FontWeight.w500,
                                         ),
@@ -109,10 +111,21 @@ class Jobs extends StatelessWidget {
                                   width: screenHeight * 0.025,
                                   fit: BoxFit.contain,
                                 ),
+
+                                IconButton(
+                                  icon: Icon(Icons.account_circle, size: screenHeight * 0.03),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => AuthenticationWrapper()),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           ),
-                        ),
+
+                        /*),
                       ),
                       // Right aligned
                       Expanded(
@@ -120,15 +133,7 @@ class Jobs extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             // Profile Icon
-                            IconButton(
-                              icon: Icon(Icons.account_circle, size: screenHeight * 0.03),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => AuthenticationWrapper()),
-                                );
-                              },
-                            ),
+
                             // Dropdown menu for login/register
 
                           ],
@@ -137,7 +142,7 @@ class Jobs extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
+              ),*/
             ),
             //End Header
 
@@ -195,7 +200,7 @@ class Jobs extends StatelessWidget {
                 future: fetchJobs(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.blue)));
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {

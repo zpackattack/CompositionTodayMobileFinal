@@ -62,81 +62,53 @@ class Concerts extends StatelessWidget {
               expandedHeight: 108.0, // Adjust the height as needed
               backgroundColor: Colors.white,
               flexibleSpace: FlexibleSpaceBar(
-                title: Align(
-                  alignment: Alignment.bottomCenter,
-
-
-                  child: Row(
-                    children: <Widget>[
-
-                      // Left aligned
-
-                      ClipRect(
-                        child: Expanded(
-                          child:Padding(
-                            padding: Platform.isIOS ? EdgeInsets.symmetric(horizontal: screenWidth * 0.03) : EdgeInsets.only(left: 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                RichText(
-                                  textAlign: TextAlign.start,
-                                  text: TextSpan(
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: 'COMPOSITION:',
-                                        style: TextStyle(
-                                          color: Color(0xFF454545),
-                                          fontSize: screenHeight * 0.018,
-                                          fontFamily: 'SF Pro',
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: 'TODAY',
-                                        style: TextStyle(
-                                          color: Color(0xFF228BE6),
-                                          fontSize: screenHeight * 0.018,
-                                          fontFamily: 'SF Pro',
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                //Logo
-                                Image.asset(
-                                  'lib/assets/img/MusicNote.png',
-                                  height: screenHeight * 0.025,
-                                  width: screenHeight * 0.025,
-                                  fit: BoxFit.contain,
-                                ),
-                              ],
+                titlePadding: EdgeInsets.only(left: screenWidth*0.06),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'COMPOSITION:',
+                            style: TextStyle(
+                              color: Color(0xFF454545),
+                              fontSize: screenHeight * 0.019,
+                              fontFamily: 'SF Pro',
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                        ),
-                      ),
-                      // Right aligned
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            // Profile Icon
-                            IconButton(
-                              icon: Icon(Icons.account_circle, size: screenHeight * 0.03),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => AuthenticationWrapper()),
-                                );
-                              },
+                          TextSpan(
+                            text: 'TODAY',
+                            style: TextStyle(
+                              color: Color(0xFF228BE6),
+                              fontSize: screenHeight * 0.019,
+                              fontFamily: 'SF Pro',
+                              fontWeight: FontWeight.w500,
                             ),
-                            // Dropdown menu for login/register
-
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    //Logo
+                    Image.asset(
+                      'lib/assets/img/MusicNote.png',
+                      height: screenHeight * 0.025,
+                      width: screenHeight * 0.025,
+                      fit: BoxFit.contain,
+                    ),
+
+                    IconButton(
+                      icon: Icon(Icons.account_circle, size: screenHeight * 0.03),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AuthenticationWrapper()),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -197,7 +169,7 @@ class Concerts extends StatelessWidget {
                 future: fetchConcerts(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.blue)));
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {

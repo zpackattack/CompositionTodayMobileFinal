@@ -71,8 +71,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bottom Tab Navigator',
       theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+        ),
 
-        primarySwatch: Colors.blue,
+        //primarySwatch: Colors.blue,
       ),
       home: MyBottomNavigationBar(),
     );
