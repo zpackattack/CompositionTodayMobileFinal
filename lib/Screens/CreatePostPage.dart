@@ -70,10 +70,7 @@ class _CreatePostPageState extends State<CreateJobPostPage> {
               if(_opportunityType == "Compositions")
                 CompositionOpportunityForm(),
 
-              ElevatedButton(
-                onPressed: _submit,
-                child: Text('Create Post'),
-              ),
+
             ],
           ),
         ),

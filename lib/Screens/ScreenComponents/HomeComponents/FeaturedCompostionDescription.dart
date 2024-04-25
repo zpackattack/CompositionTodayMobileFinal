@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:compositiontodaymobile1/Screens/competitions2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +106,11 @@ class FeaturedCompositionDescription extends StatelessWidget {
                     onPressed: () async {
                       final url = Uri.parse(data.link);
                       if (await canLaunchUrl(url)) {
-                        launchUrl(url, mode: LaunchMode.externalApplication);
+                        if (Platform.isIOS) {
+                          launchUrl(url, mode: LaunchMode.inAppBrowserView);
+                        } else {
+                          launchUrl(url, mode: LaunchMode.externalApplication);
+                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(

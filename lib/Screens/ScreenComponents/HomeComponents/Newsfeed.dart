@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -39,7 +41,11 @@ class Newsfeed extends StatelessWidget {
                   onTap: () async {
                     final url = Uri.parse(link); // Replace 'https://example.com' with your desired URL
                     if (await canLaunchUrl(url)) {
-                      launchUrl(url, mode: LaunchMode.externalApplication);
+                      if (Platform.isIOS) {
+                        launchUrl(url, mode: LaunchMode.inAppBrowserView);
+                      } else {
+                        launchUrl(url, mode: LaunchMode.externalApplication);
+                      }
                     }
                   },
               child: Stack(

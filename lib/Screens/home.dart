@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
+//import 'dart:io';
 
 import 'package:compositiontodaymobile1/Screens/ScreenComponents/HomeComponents/BlogDescription.dart';
 import 'package:compositiontodaymobile1/Screens/profile.dart';
@@ -12,6 +12,7 @@ import 'ScreenComponents/HomeComponents/Newsfeed.dart';
 import 'ScreenComponents/HomeComponents/Blog.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io' show Platform;
 //import '../../assets/img/BigMusicNote.png';
 import 'headers.dart';
 
@@ -133,7 +134,13 @@ class home extends StatelessWidget {
                       onPressed: () async {
                         final url = Uri.parse('http://compositiontoday.net');
                         if (await canLaunchUrl(url)) {
-                          launchUrl(url, mode: LaunchMode.externalApplication);
+                          if (Platform.isIOS) {
+
+                            launchUrl(url, mode: LaunchMode.inAppBrowserView);
+                          } else {
+                              launchUrl(url, mode: LaunchMode.externalApplication);
+
+                            }
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -324,7 +331,11 @@ class home extends StatelessWidget {
                                           onPressed: () async {
                                             final url = Uri.parse('http://compositiontoday.net/#/news');
                                             if (await canLaunchUrl(url)) {
-                                            launchUrl(url, mode: LaunchMode.externalApplication);
+                                                if (Platform.isIOS) {
+                                                launchUrl(url, mode: LaunchMode.inAppBrowserView);
+                                                } else {
+                                                launchUrl(url, mode: LaunchMode.externalApplication);
+                                                }
                                             }
                                           },
                                           style: ElevatedButton.styleFrom(
@@ -379,7 +390,11 @@ class home extends StatelessWidget {
                                             onPressed: () async {
                                               final url = Uri.parse('http://compositiontoday.net/#/news');
                                               if (await canLaunchUrl(url)) {
-                                                launchUrl(url, mode: LaunchMode.externalApplication);
+                                                if (Platform.isIOS) {
+                                                  launchUrl(url, mode: LaunchMode.inAppBrowserView);
+                                                } else {
+                                                  launchUrl(url, mode: LaunchMode.externalApplication);
+                                                }
                                               }
                                             },
                                             style: ElevatedButton.styleFrom(
@@ -501,7 +516,11 @@ class home extends StatelessWidget {
                                               onPressed: () async {
                                                 final url = Uri.parse('https://compositiontoday.net/#/blog');
                                                 if (await canLaunchUrl(url)) {
-                                                  launchUrl(url, mode: LaunchMode.externalApplication);
+                                                  if (Platform.isIOS) {
+                                                    launchUrl(url, mode: LaunchMode.inAppBrowserView);
+                                                  } else {
+                                                    launchUrl(url, mode: LaunchMode.externalApplication);
+                                                  }
                                                 }
                                               },
                                               style: ElevatedButton.styleFrom(
@@ -556,7 +575,11 @@ class home extends StatelessWidget {
                                             onPressed: () async {
                                               final url = Uri.parse('http://compositiontoday.net/#/blog');
                                               if (await canLaunchUrl(url)) {
-                                                launchUrl(url, mode: LaunchMode.externalApplication);
+                                                if (Platform.isIOS) {
+                                                  launchUrl(url, mode: LaunchMode.inAppBrowserView);
+                                                } else {
+                                                  launchUrl(url, mode: LaunchMode.externalApplication);
+                                                }
                                               }
                                             },
                                             style: ElevatedButton.styleFrom(
